@@ -27,6 +27,7 @@
         var dir = true;
         //获取包含div高度
         var divHeight = window.getComputedStyle(document.getElementsByClassName('wrap')[0],null).height;
+        //第二个参数是要上移的高度
         rollContent(dir,parseInt(ulHeight) - parseInt(divHeight));
 
     }
