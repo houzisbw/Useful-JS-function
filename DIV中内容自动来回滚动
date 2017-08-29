@@ -1,0 +1,53 @@
+//核心思想是将滚动的内容包在一个div中，控制div的top值来滚动，其中坑很多
+
+//HTML
+<div class="wrap">
+    <div class="roll" style="width: 10px">
+        <ul class="roll_ul">
+        </ul>
+    </div>
+</div>
+
+//Javascript
+//初始化HTML列表
+    function initContent(num){
+        var ul = document.getElementsByClassName('roll_ul')[0];
+        for(var i=0;i<num;i++){
+            var li = document.createElement('li');
+            li.innerText = "这是一条测试文本啊哈哈哈哈哈哈"+i;
+            ul.appendChild(li);
+        }
+    }
+    window.onload = function(){
+        initContent(10);
+        var ul = document.getElementsByClassName('roll_ul')[0];
+        //获取包含ul的div的高度
+        var ulHeight = parseInt(window.getComputedStyle(ul,null).height);
+        //包含div移动方向
+        var dir = true;
+        //获取包含div高度
+        var divHeight = window.getComputedStyle(document.getElementsByClassName('wrap')[0],null).height;
+        rollContent(dir,parseInt(ulHeight) - parseInt(divHeight));
+
+    }
+    function rollContent(dir,height){
+        var d = document.getElementsByClassName('roll')[0];
+        var currentTop = window.getComputedStyle(d,null).top;
+        var nextTop;
+
+        if(parseInt(currentTop, 10) === -height){
+            dir = false;
+        }
+        if(parseInt(currentTop, 10) === 0){
+            dir = true;
+        }
+        if(dir) {
+            nextTop = parseInt(currentTop, 10) - 1 + 'px';
+            d.setAttribute("style", 'position: relative;top:' + nextTop);
+        }
+        else{
+            nextTop = parseInt(currentTop, 10) + 1 + 'px';
+            d.setAttribute("style", 'position: relative;top:' + nextTop);
+        }
+        setTimeout(function(){rollContent(dir,height)},100);
+    }
