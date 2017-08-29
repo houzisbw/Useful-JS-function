@@ -1,0 +1,53 @@
+//密码强度实时验证,计算密码总权重
+//规则：小于6位不合格，字符权重 数字1，小写字母2，其他3
+//长度>=6 权重<10 弱
+//长度>=6 10<=权重<15 中
+//长度>=6 权重>=15 强
+
+//HTML
+请输入密码:
+<input type="password" id="password">
+<span id="assess"></span>
+
+//Js
+var input = document.getElementById('password');
+//遍历密码计算权重
+function caculateWeight(s){
+        var weight = 0;
+        for(var i=0;i<s.length;i++){
+            if(s.charCodeAt(i)>=65 && s.charCodeAt(i)<=90){
+                weight+=2;
+            }
+            else if(s.charCodeAt(i)>=48 && s.charCodeAt(i)<=57){
+                weight+=1;
+            }
+            else{
+                weight+=3;
+            }
+        }
+        return weight;
+    }
+    //每次按键都要计算强度
+    input.onkeyup = function(){
+        var passwordLength = input.value.length;
+        var assessText = document.getElementById('assess');
+        if(passwordLength < 6){
+            assessText.innerText = '不合格';
+            assessText.setAttribute('style','color:red')
+        }
+        else{
+            var weight = caculateWeight(input.value);
+            if(weight<10){
+                assessText.innerText = '弱';
+                assessText.setAttribute('style','color:orange')
+            }
+            else if(weight>=10 && weight<15){
+                assessText.innerText = '中';
+                assessText.setAttribute('style','color:yellow')
+            }
+            else{
+                assessText.innerText = '强';
+                assessText.setAttribute('style','color:green')
+            }
+        }
+    }
