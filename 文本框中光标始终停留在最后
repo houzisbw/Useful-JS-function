@@ -1,0 +1,7 @@
+//setSelectionRange的2个参数是开始和结束选中的位置，其中的文本会被选中
+
+var input = document.getElementById('input');
+    input.onclick = input.onkeyup = function(){
+        var len = input.value.length;
+        this.setSelectionRange(len,len)
+    }
