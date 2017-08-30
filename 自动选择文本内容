@@ -1,0 +1,8 @@
+//select函数没有参数，会选中其中所有文本，针对于所有输入元素，setSelectionRange是仅仅针对于input元素的
+
+//HTML
+<textarea id="textarea">选中的文本</textarea>
+
+//JS
+var t = document.getElementById("textarea");
+t.select();
