@@ -1,0 +1,2 @@
+//提交表单后，不会记忆本次提交内容，H5新增属性
+<input type="text" autocomplete="off">
