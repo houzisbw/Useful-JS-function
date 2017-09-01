@@ -1,0 +1,27 @@
+//html
+<input type="checkbox" id="c1" name="a"><label for="c1">喵</label><br>
+<input type="checkbox" id="c2" name="a"><label for="c2">喵</label><br>
+<input type="checkbox" id="c3" name="a"><label for="c3">喵</label><br>
+
+//js
+//注意在onclick起作用之前，复选框就已经触发了选中事件了，所以不能在onclick里面判断本框是否选中
+var inputs = document.getElementsByName('a');
+var maxSelectedNum = 2,currentSelectNum=0;
+for(var i=0;i<inputs.length;i++){
+        //闭包让i传值
+        (function(i) {
+            inputs[i].onclick = function (event) {
+                //获取已经选取的数目
+                currentSelectNum=0;
+                for(var j=0;j<inputs.length;j++) {
+                    if(inputs[j].checked){
+                        currentSelectNum++;
+                    }
+                }
+                //如果大于最大值，则取消选择
+                if(currentSelectNum>maxSelectedNum){
+                    inputs[i].checked=false;
+                }
+            }
+        })(i);
+    }
