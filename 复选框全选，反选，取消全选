@@ -1,0 +1,29 @@
+//html
+<input type="checkbox" id="c1" name="a"><label for="c1">喵</label><br>
+<input type="checkbox" id="c2" name="a"><label for="c2">喵</label><br>
+<input type="checkbox" id="c3" name="a"><label for="c3">喵</label><br>
+<button onclick="selectAll()">全选</button>
+<button onclick="selectNone()">取消全选</button>
+<button onclick="selectReverse()">反选</button>
+
+//js
+var inputs = document.getElementsByName('a');
+function selectAll(){
+    for(var i=0;i<inputs.length;i++){
+        if(!inputs[i].checked){
+            inputs[i].checked = true;
+        }
+    }
+}
+function selectNone(){
+    for(var i=0;i<inputs.length;i++){
+        if(inputs[i].checked){
+            inputs[i].checked = false;
+        }
+    }
+}
+function selectReverse(){
+    for(var i=0;i<inputs.length;i++){
+        inputs[i].checked = !inputs[i].checked;
+    }
+}
