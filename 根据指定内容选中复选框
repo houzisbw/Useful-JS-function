@@ -1,0 +1,24 @@
+//html
+<p>如果文本框内含有 喵 咩 噜 ，下面文本框就会被选中</p>
+<textarea cols="10" rows="4" class="textArea"></textarea><br>
+<input type="checkbox" id="miao" name="input">喵<br>
+<input type="checkbox" id="mie" name="input">咩<br>
+<input type="checkbox" id="lu" name="input">噜<br>
+//js
+var textArea = document.getElementsByClassName('textArea')[0];
+var keywords = {'喵':'miao','咩':'mie','噜':'lu'};
+textArea.onkeyup = function(e){
+        //所有input不选中
+   var inputs = document.getElementsByName('input');
+   for(var i=0;i<inputs.length;i++){
+       inputs[i].checked=false;
+   }
+   var v = e.target.value;
+   for(var key in keywords){
+      var reg = new RegExp(key,'gi');
+          if(reg.test(v)){
+                var input = document.getElementById(keywords[key]);
+                input.checked = 'true';
+            }
+        }
+    }
