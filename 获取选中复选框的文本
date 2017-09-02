@@ -1,0 +1,23 @@
+//html
+<input type="checkbox" id="miao" name="input"><label for="lu">我是喵</label><br>
+<input type="checkbox" id="mie" name="input"><label for="miao">我是咩</label><br>
+<input type="checkbox" id="lu" name="input"><label for="mie">我是噜</label><br>
+<p id="p"></p>
+
+//js
+var inputs = document.getElementsByName('input');
+for(var i=0;i<inputs.length;i++){
+        (function(i){
+            inputs[i].onclick = function(e){
+                var p = document.getElementById('p');
+                var text = '已选中: ';
+                for(var j=0;j<inputs.length;j++){
+                    if(inputs[j].checked){
+                        //下一个节点的文本
+                        text+=inputs[j].nextSibling.innerText;
+                    }
+                }
+                p.innerText = text;
+            }
+        })(i)
+    }
