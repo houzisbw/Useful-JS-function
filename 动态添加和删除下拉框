@@ -1,0 +1,37 @@
+//html
+<button id="add" onclick="addItem()">添加一项</button><input id="input" type="text"><br>
+<button id="del" onclick="deleteItem()">删除一项</button><br>
+请选择:
+<select id="select">
+    <option value="">请选择</option>
+    <option value="miao">喵</option>
+    <option value="mie">咩</option>
+    <option value="lu">噜</option>
+</select>
+
+//js
+var sel = document.getElementById('select');
+function addItem(){
+    var inputValue = document.getElementById('input').value;
+    if(inputValue!==''){
+        var opt = document.createElement('option');
+        opt.value=inputValue;
+        opt.innerText = inputValue;
+        sel.appendChild(opt);
+    }
+    else{
+        alert('请输入文字');
+        return;
+    }
+}
+function deleteItem(){
+    if(sel.value===''){
+        alert('请选中一项后删除');
+        return;
+    }
+    for(var i=0;i<sel.children.length;i++){
+        if(sel.children[i].selected){
+            sel.removeChild(sel.children[i]);
+        }
+    }
+}
