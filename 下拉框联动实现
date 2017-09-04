@@ -1,0 +1,46 @@
+//html
+<p>下拉二级框联动效果</p>
+<span>省份</span>:
+<select id="province">
+    <option value="北京" selected>北京</option>
+    <option value="上海" >上海</option>
+    <option value="广东" >广东</option>
+</select>
+<br>
+<span>城市</span>:
+<select id="city">
+</select>
+
+
+//js
+var provinceSelect = document.getElementById('province');
+var citySelect = document.getElementById('city');
+var data = {'北京':['朝阳区','海淀区','东城区'],
+            '上海':['静安区','陆家嘴','松江区'],
+            '广东':['广州市','珠海市','揭阳市']};
+//初始化
+var bj = data['北京'];
+for(var i=0;i<bj.length;i++){
+    var option = document.createElement('option');
+    option.value = bj[i];
+    option.innerText = bj[i];
+    citySelect.appendChild(option);
+}
+//清空以及添加城市
+function resetOptions(newProvince){
+    //清空
+    while(citySelect.children.length>0){
+        citySelect.removeChild(citySelect.children[0]);
+    }
+    //添加
+    var cityList = data[newProvince];
+    for(var i=0,len=cityList.length;i<len;i++){
+        var option = document.createElement('option');
+        option.value = cityList[i];
+        option.innerText = cityList[i];
+        citySelect.appendChild(option);
+    }
+}
+provinceSelect.onchange = function(e){
+    resetOptions(e.target.value);
+}
