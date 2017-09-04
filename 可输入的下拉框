@@ -1,0 +1,23 @@
+//html
+<p>可输入的下拉框</p>
+<span>省份</span>:
+<select id="province">
+    <option value="北京" selected>北京</option>
+    <option value="上海" >上海</option>
+    <option value="广东" >广东</option>
+</select>
+<span>请输入省份:</span><input type="text" id="input">
+
+//js
+var provinceSelect = document.getElementById('province');
+var input = document.getElementById('input');
+input.onkeyup = function(e){
+    //回车键
+    if(e.keyCode === 13 && e.target.value!==''){
+        var v = e.target.value;
+        var option = document.createElement('option');
+        option.value = v;
+        option.innerText = v;
+        provinceSelect.appendChild(option)
+    }
+}
