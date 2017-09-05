@@ -1,0 +1,76 @@
+//这个东西有点蛋疼，很多细节要注意
+//html
+<!--小图片-->
+<div class="img">
+    <!--小图上的方框：放大镜-->
+    <div class="box">
+    </div>
+    <!--小图-->
+    <img src="small.jpg" id="i">
+</div>
+<!--大图显示区域-->
+<div class="big">
+    <!--大图片-->
+    <img src="origin.jpg" class="origin">
+</div>
+
+
+
+//css
+/*小图*/
+.img{
+    float:left;
+    position: relative;
+    margin-left: 100px;
+}
+/*放大后的展示窗口div*/
+.big{
+    float:left;
+    border: 1px solid black;
+    width:500px;
+    height:500px;
+    margin-left:100px;
+    overflow: hidden;
+    position: relative;
+
+}
+/*原图：注意这里的宽高都放大了一定倍数,为了是让展示窗口能够正确显示比例*/
+.origin{
+    position: absolute;
+    width:9600px;
+    height:4525px;
+    left:0;
+    top:0;
+}
+/*放大镜方框:注意这里的pointer-events属性必须，否则该div会阻碍onmousemove事件，造成鼠标在方框内方框不会移动*/
+.box {
+    width:50px;
+    height:50px;
+    position: absolute;
+    left:999999px;
+    border:1px solid orange;
+    pointer-events: none;
+}
+
+
+//js
+//小图
+var img = document.getElementById('i');
+//大图
+var originImg = document.getElementsByClassName('origin')[0];
+//方框
+var box = document.getElementsByClassName('box')[0];
+//方框边长的一半
+var offsetBox = 25;
+
+img.onmousemove = function(e){
+    //偏移量
+    var offX = e.offsetX;
+    var offY = e.offsetY;
+    //设置box的位置
+    box.style.left = offX-offsetBox+'px';
+    box.style.top = offY-offsetBox+'px';
+    //计算大图的位置,相对于展示窗口
+    originImg.style.left = -originImg.width*((offX-25)/img.width)+'px';
+    originImg.style.top= -originImg.height*((offY-25)/img.height)+'px';
+}
