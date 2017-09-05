@@ -1,0 +1,11 @@
+//html
+<img src="la.jpg" alt="d" class="img" id="i">
+
+//js,注意如果用border的话图片会被压缩一点，而outline则不会
+var img = document.getElementById('i');
+img.onmouseover = function(){
+    this.style.outline = '1px solid red';
+}
+img.onmouseout = function(){
+    this.style.outline = 'none'
+}
