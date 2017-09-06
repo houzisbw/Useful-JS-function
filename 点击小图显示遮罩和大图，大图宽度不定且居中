@@ -1,0 +1,56 @@
+//html
+<!--小图片-->
+<div class="img">
+    <img src="2.jpg">
+</div>
+<!--遮罩层，通过设置z-index为一个大值来覆盖其他元素的点击-->
+<div class="overlay">
+    <img src="" >
+</div>
+
+
+//css
+//小图
+.img {
+    width:150px;
+    height:100px;
+}
+.img img{
+    width:100%;
+    height:100%;
+}
+//遮罩
+.overlay {
+    width:100%;
+    height:100%;
+    position: fixed; //全屏显示，且不滚动
+    left:0;
+    top:0;
+    background-color: rgba(0,0,0,0.4);
+    z-index:10000;
+    display: none;
+}
+.overlay img {
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left:0px;
+    margin-top:0px;
+
+}
+
+//js
+var imgDiv = document.getElementsByClassName('img')[0];
+var overlayDiv = document.getElementsByClassName('overlay')[0];
+var img = imgDiv.children[0];
+imgDiv.onclick = function(e){
+    //遮罩层显示
+    overlayDiv.style.display='block';
+    overlayDiv.children[0].src = img.src;
+    //natural是获得图片原始属性，不是经过div约束后的属性，设置左上margin为负值来居中图片
+    overlayDiv.children[0].style['margin-left'] = -img.naturalWidth/2+'px';
+    overlayDiv.children[0].style['margin-top'] = -img.naturalHeight/2+'px';
+}
+overlayDiv.onclick = function(e){
+    overlayDiv.style.display='none';
+}
