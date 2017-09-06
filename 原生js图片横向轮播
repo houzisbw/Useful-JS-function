@@ -1,0 +1,64 @@
+//原理，用一个div来显示每一张图片，所有的图片放在ul里面，每一张都是一个li，ul宽度为图片张数*图片宽度，并且float：left，给div设置overflow:hidden
+//所以每次就显示一张图片，然后用js控制ul的left值(ul为绝对定位，div为相对定位)
+
+//html
+<div class="img">
+    <ul id="imgList">
+        <li><img src="1.jpg"></li>
+        <li><img src="2.jpg"></li>
+        <li><img src="3.jpg"></li>
+    </ul>
+</div>
+
+//css
+.img {
+    margin:100px auto;
+    width:800px;
+    height:600px;
+    border: 1px solid black;
+    overflow: hidden;
+    position: relative;
+}
+.img li {
+    float:left;
+    width:800px;
+    list-style-type: none;
+}
+.img ul {
+    position: absolute;
+    width:2400px;
+    height:auto;
+    left:0;
+    top:0;
+    transition: left 0.5s linear;
+}
+
+
+//js
+var imgList = document.getElementById('imgList');
+//图片计数器，图片数量
+var imgCount = 0,imgNumber = 3;
+//每一张图片长度，所有图片相同长度
+var stepLength = 800;
+//图片轮播,向左
+function imgPlayPeriodly(){
+    if(imgCount<imgNumber-1){
+        imgCount++;
+        //最后一张的时候直接跳转到第一张，没有动画
+        if(imgCount===0){
+            //不能直接.-webkit-transition
+            imgList.style['-webkit-transition'] = 'none';
+        }
+        else{
+            imgList.style['-webkit-transition'] = 'left 0.5s linear';
+        }
+        imgList.style.left =  -stepLength*imgCount+'px';
+        //重置为初始位置，循环播放
+        if(imgCount===imgNumber-1){
+            imgCount = -1;
+        }
+        setTimeout(imgPlayPeriodly,2000);
+    }
+}
+//开始轮播
+setTimeout(imgPlayPeriodly,2000)
