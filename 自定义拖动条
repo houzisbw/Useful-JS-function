@@ -1,0 +1,44 @@
+//有一个bug没有解决：点击拖动条垂直往上移除区域，则不会触发onmouseup事件
+//html
+<!--拖动轴容器-->
+<div class="scrollOuter">
+    <!--拖动轴-->
+    <div class="scrollBar">
+    </div>
+</div>
+
+
+//js
+//滚动轴
+var scrollBar = document.getElementsByClassName('scrollBar')[0];
+var isScrollBarClick = false;
+//外层滚动范围宽度
+var scrollOuter = document.getElementsByClassName('scrollOuter')[0];
+var scrollWidth = parseInt(getComputedStyle(scrollBar).width);
+var scrollWrapWidth = parseInt(getComputedStyle(scrollOuter).width);
+//鼠标按下时这个点相对于滑动条左边的距离
+var deltaLeft = 0;
+scrollBar.onmousedown = function(e){
+    if (e.preventDefault) {
+        e.preventDefault();
+    }else {
+        e.returnValue = false;
+    }
+    //获取鼠标点击点相对于拖动轴左侧的距离
+    deltaLeft = e.offsetX;
+    isScrollBarClick = true;
+}
+
+document.body.onmouseup = function(e){
+    isScrollBarClick = false;
+}
+
+scrollBar.onmousemove = function(e){
+    if(isScrollBarClick){
+        //这里的计算要注意
+        var dist = e.clientX - scrollOuter.offsetLeft - deltaLeft;
+        if(dist >=0 && dist<=scrollWrapWidth-scrollWidth) {
+            scrollBar.style.left = dist + 'px';
+        }
+    }
+}
