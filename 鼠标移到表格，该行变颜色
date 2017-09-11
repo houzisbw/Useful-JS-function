@@ -1,0 +1,44 @@
+//原理：首先获取table的tr，利用给tr加上onmouseover和onmouseout来控制
+//html
+<table id="table" cellpadding="20"  border="1" >
+    <tr align="center">
+        <td>1345</td>
+        <td>234534</td>
+        <td>33534</td>
+    </tr>
+    <tr align="center">
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+    </tr>
+    <tr align="center">
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
+</table>
+
+
+//css
+#table {
+    border-collapse: collapse;
+}
+#table td {
+    width:100px;
+    height:40px;
+}
+
+//js
+var table = document.getElementById('table');
+var trs = table.rows;
+for(var i=0;i<trs.length;i++){
+    trs[i].onmouseover = function(e){
+        //此处注意了，this指tr这一行，而e.target则是具体的td
+        this.style.backgroundColor='blue';
+        //不能这样用
+        //e.target.style.backgroundColor='blue';
+    }
+    trs[i].onmouseout = function(e){
+        this.style.backgroundColor='transparent';
+    }
+}
