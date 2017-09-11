@@ -1,0 +1,83 @@
+//另一种方法：利用table.deleteRow(rowNum),原生的函数
+//html
+<button class="add button-base" onclick="addRow()">增加一行</button>
+<button class="delete button-base" onclick="deleteRow()">删除一行</button>
+<table class="table" border="1">
+    <tr>
+        <th>国家</th>
+        <th>地区</th>
+        <th>城市</th>
+        <th>操作</th>
+    </tr>
+</table>
+
+
+//css
+.button-base {
+    border-radius: 10px;
+    height:40px;
+    width:100px;
+
+    text-align: center;
+    line-height: 40px;
+    border: none;
+    font-size: 16px;
+    color:white;
+}
+.add{
+    background-color: darkgreen;
+}
+.delete {
+    background-color: darkred;
+}
+.table {
+    margin-top: 50px;
+    border-collapse: collapse;
+
+}
+.table td,th{
+    width:100px;
+    height:30px;
+    line-height: 30px;
+    text-align: center;
+}
+.table button{
+    width:80px;
+    height:25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #B94A48;
+    color:white;
+}
+
+
+//js
+var table = document.getElementsByClassName('table')[0];
+var cnt= 0;
+function addRow(){
+    var tr = document.createElement('tr');
+    for(var i=0;i<4;i++){
+        var td = document.createElement('td');
+        if(i===3){
+            var btn = document.createElement('button');
+            btn.innerText = '删除';
+            btn.onclick = function(e){
+                table.removeChild(this.parentNode.parentNode);
+            }
+            td.appendChild(btn);
+        }
+        if(i!==3) td.innerText = cnt++;
+        tr.appendChild(td)
+    }
+    table.appendChild(tr)
+}
+function deleteRow(){
+    var rowsNum = table.getElementsByTagName('tr').length;
+    if(rowsNum>1){
+        var rows = table.rows;
+        table.removeChild(rows[rows.length-1])
+    }
+    else{
+        alert('表格为空。无法删除')
+    }
+}
