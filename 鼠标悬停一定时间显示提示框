@@ -1,0 +1,44 @@
+//原理：利用settimeout方法，只要鼠标移动，就重置计时器(clearTimeout)
+//html
+<div class="msg">
+    悬停显示
+</div>
+<!--被悬停的图片-->
+<img src="la.jpg" id="img">
+
+
+//css
+.msg{
+    width:100px;
+    height:50px;
+    position: absolute;
+    border: 1px solid grey;
+    display: none;
+    line-height: 50px;
+    color:black;
+    background-color: #dddddd;
+    text-align: center;
+}
+
+//js
+var img = document.getElementById('img');
+var msg = document.getElementsByClassName('msg')[0];
+var timer = null;
+//显示提示图片
+function show(x,y){
+    msg.style.display = 'block';
+    msg.style.left = x+'px';
+    msg.style.top= y+'px';
+}
+img.onmousemove = function(e){
+    //只要移动鼠标就重置计时器，不动鼠标一定时间后会触发show
+    msg.style.display = 'none';
+    clearTimeout(timer);
+    //获取鼠标坐标
+    var posx = e.clientX,
+        posy = e.clientY;
+    timer = setTimeout(function(){show(posx,posy);},2000);
+}
+img.onmouseout = function(){
+    clearTimeout(timer);
+}
