@@ -1,0 +1,118 @@
+//这个bug还未解决:如果向上或下拖动，不会触发onmouseup，日了狗了
+//html
+<table class="table" border="1" onselectstart="return false">
+    <tr>
+        <td>成都</td>
+        <td>北京</td>
+        <td>上海</td>
+    </tr>
+    <tr>
+        <td>纽约</td>
+        <td>洛杉矶</td>
+        <td>旧金山</td>
+    </tr>
+    <tr>
+        <td>波兰</td>
+        <td>妹物秋</td>
+        <td>喵</td>
+    </tr>
+</table>
+<div class="draggedContent">
+</div>
+
+//css
+.table {
+    border-collapse: collapse;
+    margin:0 auto;
+
+}
+.table td{
+    text-align: center;
+    width:100px;
+    height:50px;
+
+}
+.draggedContent {
+    width:100px;
+    height:30px;
+    background-color: #B94A48;
+    border-radius: 3px;
+    position: absolute;
+    display: none;
+    color:white;
+    pointer-events: none;
+    text-align: center;
+    line-height:30px;
+}
+
+
+//js
+var table = document.getElementsByClassName('table')[0];
+var tableWidth = parseInt(getComputedStyle(table,null).width);
+var tableHeight = parseInt(getComputedStyle(table,null).height);
+var content = document.getElementsByClassName('draggedContent')[0];
+var isDragOn = false;
+var tempContent = '';
+document.ondragstart = function(ev) {
+    ev.preventDefault();
+    return false;
+};
+document.ondragend = function(ev) {
+    ev.preventDefault();
+    return false;
+};
+document.body.onmousemove = function(){
+    return false;
+}
+
+//注意不能用table的onmouseout，因为每个td也会触发这个事件
+//    table.onmouseout = function(e){
+//
+//        isDragOn = false;
+//        console.log('222')
+//    }
+
+//每个td如果按下左键，则isDragOn为true，body如果放开左键，则isDragOn为false
+var tds = table.getElementsByTagName('td');
+for(var i=0;i<tds.length;i++){
+    tds[i].onmousedown = function(e){
+        isDragOn = true;
+        tempContent = this.innerText;
+
+    }
+    tds[i].onmouseover = function(e){
+        if(isDragOn) {
+            this.style.backgroundColor = 'orange';
+        }
+    }
+    tds[i].onmouseout = function(e){
+        e.preventDefault();
+        if(isDragOn) {
+            this.style.backgroundColor = 'white';
+        }
+    }
+    tds[i].onmouseup = function(e){
+        this.style.backgroundColor = 'white';
+        if(isDragOn){
+            this.innerText = tempContent;
+        }
+    }
+
+}
+//在table外抬起鼠标，隐藏拖动内容，但是有bug
+document.body.onmouseup=function(){
+    isDragOn = false;
+    content.style.display = 'none';
+}
+
+//拖动过程中的move处理
+table.onmousemove = function(e){
+    if(isDragOn){
+        var x = e.clientX,
+            y = e.clientY;
+        content.style.display = 'block';
+        content.style.left = x+'px';
+        content.style.top = y+'px';
+        content.innerText = tempContent;
+    }
+}
