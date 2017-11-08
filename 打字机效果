@@ -1,0 +1,29 @@
+//一个span存放字符，一个存放下划线模拟光标
+//html
+<div id="printer">
+    <span id="word">
+    </span>
+    <span id="cursor">_</span>
+</div>
+
+
+//js
+var wordToPrint = '罗秋雨很可爱呀！啦啦啦,是地方官黑客技术淡饭黄齑第三方';
+var printerDiv = document.getElementById('word');
+var timerId,index=0;
+var cursor = document.getElementById('cursor');
+function showHideCursor(){
+    cursor.style.display = cursor.style.display == 'none' ? 'inline':'none';
+    setTimeout(showHideCursor,500);
+}
+function print(str,printerDiv){
+    if(index > str.length-1){
+        return;
+    }
+    printerDiv.innerText += str[index];
+    timerId = setTimeout(function(){print(str,printerDiv)},Math.floor(Math.random()*10)*100);
+    index++;
+}
+
+print(wordToPrint,printerDiv);
+showHideCursor()
