@@ -1,0 +1,38 @@
+//html
+<p>字幕上下滚动</p><br/>
+<div class="rollWrap">
+    <ul class="newsList">
+        <li>第1条新闻啦啦啦</li>
+        <li>第2条新闻啦啦啦</li>
+        <li>第3条新闻啦啦啦</li>
+        <li>第4条新闻啦啦啦</li>
+        <li>第5条新闻啦啦啦</li>
+        <li>第6条新闻啦啦啦</li>
+    </ul>
+</div>
+
+//css
+.rollWrap {
+    width:200px;
+    height:50px;
+    border: 1px solid #000;
+    overflow: hidden;
+}
+
+//js,注意使用trigger让刚进入页面的时候也能触发滚动
+var $newsList = $('.newsList');
+var lineHeight = $newsList.find('li').height();
+var timerId = null;
+$newsList.hover(function(){
+    clearInterval(timerId);
+},function(){
+    timerId = setInterval(function(){
+        $newsList.animate({
+            marginTop: '-='+lineHeight+'px'
+        },2000,function(){
+            $newsList.css({marginTop:0});
+            //这里appendTo能够删除第一条li并添加到最后
+            $newsList.find('li:first').appendTo($newsList);
+        })
+    },2000)
+}).trigger('mouseleave')
