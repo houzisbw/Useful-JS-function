@@ -1,0 +1,23 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    position: relative;
+}
+#rating{
+    transform: translate(-50%,-50%);
+    /*为什么absolute不行？*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+.rating-star{
+    width:50px;
+    height:50px;
+    float:left;
+    list-style-type: none;
+    background-image: url('./image/red.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
