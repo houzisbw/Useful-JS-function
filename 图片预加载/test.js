@@ -1,5 +1,6 @@
 //预加载，原理是建立一个加载页面，利用Image对象的onload事件
 //<img> 标签每出现一次，一个 Image 对象就会被创建。
+//预加载的做法是，在页面加载完，鼠标移入之前就通过Image对象把图片加载进缓存了，这样鼠标移入的时候直接从缓存里读取了，速度很快
 
 var imgs=[
     'http://img.article.pchome.net/00/44/23/20/pic_lib/wm/2.jpg',
