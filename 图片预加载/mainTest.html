@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片预加载-无须加载</title>
+    <link rel="stylesheet" href="test.css" type="text/css">
+</head>
+<body>
+<div class="box">
+    <img width='1200' src="" alt="图片" id="img" />
+    <p>
+        <a href="javascript:;" class="btn" data-control="prev">上一张</a>
+        <a href="javascript:;" class="btn" data-control="next">下一张</a>
+    </p>
+</div>
+<!--加载页-->
+<div class="loading">
+    <p class="progress">0%</p>
+</div>
+<script src="./jquery-2.1.1.min.js"></script>
+<script src="./test.js"></script>
+</body>
+</html>
