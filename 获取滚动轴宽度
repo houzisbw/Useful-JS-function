@@ -1,0 +1,20 @@
+//获取滚动轴宽度：注意在mac下是0，win7下一般是17
+function getScrollBarWidth(){
+    //新建一个div
+    var div = document.createElement('div');
+    //设置style
+    var style = {
+        width:'100px',
+        height:'100px',
+        overflow:'scroll'
+    };
+    for(var i in style){
+        div.style[i] = style[i];
+    }
+    document.body.appendChild(div);
+    //实际占有宽度 - 可视区域宽度，滚动轴会占有原来的width设定的宽度，所以clientWidth是比原来小
+    var scrollWidth = div.offsetWidth - div.clientWidth;
+    document.body.removeChild(div);
+    return scrollWidth;
+}
+console.log(getScrollBarWidth());
