@@ -1,0 +1,22 @@
+//jquery获取元素到窗口顶部(可视区域)的距离:元素到文档顶部的距离 - 文档被卷去的高度
+var distToWindowTop = $('.target').offset().top - $(document).scrollTop();
+
+//jquery获取元素到文档顶部的距离
+var distToDocumentTop = $('.target').offset().top;
+
+//jquery获取窗口大小
+var windowWidth = $(window).width();
+var widowHeight = $(window).height();
+
+//jquery获取元素在垂直方向上占据的空间，不包含margin，包含border
+$('.target').outerHeight();
+//jquery获取元素在垂直方向上占据的空间，包含margin，包含border
+$('.target').outerHeight(true);
+
+//jquery获取元素包含padding的尺寸
+$('.target').innerWidth();
+//jquery获取元素不包含padding的尺寸
+$('.target').width();
+
+//jquery获取已被卷去的尺寸,如加参数则是设置滚动条位置到参数的位置
+$('.target').scrollTop();
