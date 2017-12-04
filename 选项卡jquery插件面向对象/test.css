@@ -1,0 +1,70 @@
+*{
+    margin:0;
+    padding:0;
+}
+.clear{
+    zoom:1;
+}
+/*重要，设置上一级的宽高，不会出现滚动条*/
+html,body{
+    height:100%;
+    width:100%;
+}
+body{
+    background-color: #323232;
+    font-size:12px;
+    font-family: '微软雅黑';
+    padding:100px;
+}
+.clear:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.tab{
+    width:300px;
+}
+.tab-nav{
+    height:30px;
+}
+.tab-nav li{
+    float:left;
+    margin-right:5px;
+    background-color: #767676;
+    border-radius: 3px 3px 0 0;
+    list-style:none;
+}
+.tab-nav li a {
+    text-decoration: none;
+    display: block;
+    height:30px;
+    padding:0 20px;
+    color:#fff;
+    line-height: 30px;
+}
+.tab-nav li.active{
+    background-color: #fff;
+}
+.tab-nav li.active a {
+    color: #767676;
+}
+.content-wrap{
+    background-color: #fff;
+    padding: 5px;
+    height:250px;
+    position: relative;
+}
+.content-item img{
+    /*保证img自适应div大小*/
+    width:96%;
+    height:96%;
+}
+.content-item{
+    display: none;
+    width:100%;
+    height:100%;
+    position: absolute;
+}
+.current{
+    display: block;
+}
