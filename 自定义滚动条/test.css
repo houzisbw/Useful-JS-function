@@ -1,0 +1,90 @@
+.clear{
+    zoom:1;
+}
+/*重要，设置上一级的宽高，不会出现滚动条*/
+html,body{
+    height:100%;
+}
+.clear:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+body{
+    background-color: #ccc;
+}
+.scroll{
+    width:540px;
+    border:1px solid #e5e5e5;
+    background-color: #fff;
+    margin:30px auto;
+}
+.scroll-tab{
+    height:34px;
+    border-bottom: 1px solid #e5e5e5;
+    color:#666;
+    background: #f8f8f8;
+}
+.scroll-tab .tab-item{
+    float:left;
+    /*34px是行高，后面要有字体，否则css语法错误*/
+    font: 14px/34px "Microsoft YaHei";
+    height:34px;
+    text-align: center;
+    border-right:1px solid #e5e5e5;
+    /*控制tab宽度不能设置width，要设padding动态改变*/
+    padding:0 20px;
+}
+.tab-active{
+    color:#00be3c;
+    background: #fff;
+    border-top:2px solid #00be3c;
+    /*如果不是border-box,那么会挤下去tab，所以设置margin,综合
+    起来正好向下1px，盖住底部边框*/
+    margin: -1px 0 0 0;
+}
+/*滚动区域，高度一定*/
+.scroll-wrap{
+    width:100%;
+    height:300px;
+    position: relative;
+}
+/*滚动内容区*/
+.scroll-wrap .scroll-content{
+    height:100%;
+    overflow: hidden;
+    padding: 0 15px;
+}
+.scroll-wrap .scroll-content h3{
+    /*3指的是行高是16px的3倍*/
+    font:16px/3 "Microsoft YaHei";
+    text-align: center;
+}
+.scroll-wrap .scroll-content p{
+    font-size: 14px;
+    line-height: 20px;
+    text-indent: 2em;
+    margin-bottom: 10px;
+}
+/*滚动条,绝对定位*/
+.scroll-bar{
+    position: absolute;
+    right:0;
+    top:0;
+    width:10px;
+    height:100%;
+    background-color:#eaeaea;
+}
+/*滑块,相对于滚动条定位*/
+.scroll-slide{
+    position: absolute;
+    top:0;
+    /*有空隙方便看出是滑块*/
+    left:1px;
+    width:9px;
+    height:40px;
+    background-color: #fff;
+}
+
+
+
