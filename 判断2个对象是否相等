@@ -1,0 +1,21 @@
+let isObjectEqual = (obj1,obj2)=>{
+	let obj1Keys = Object.getOwnPropertyNames(obj1),
+		obj2Keys = Object.getOwnPropertyNames(obj2);
+	if(obj1Keys.length!==obj2Keys.length){
+		return false;
+	}
+	for(let i=0;i<obj1Keys.length;i++){
+		//如果都是对象则进行深度比较
+		if(typeof  obj1[obj1Keys[i]] === 'object' && typeof  obj2[obj2Keys[i]] === 'object'){
+			return isObjectEqual(obj1[obj1Keys[i]],obj2[obj2Keys[i]])
+		}
+		if(obj1[obj1Keys[i]]!==obj2[obj2Keys[i]]){
+			//判断NaN，如果2个都是Nan则认为相等
+			if(obj1[obj1Keys[i]]!==obj1[obj1Keys[i]] && obj2[obj2Keys[i]]!==obj2[obj2Keys[i]]){
+				return true;
+			}
+			return false;
+		}
+	}
+	return true;
+}
